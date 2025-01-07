@@ -97,8 +97,16 @@ const TaskManagement = () => {
         const response = await axiosInstance.post("roommates", roommate);
         setRoommates([...roommates, response.data]);
         setNewRoommate("");
+
+        // Add toaster notification
+        // toast .success("Roommate added successfully!");
+
+        // Refetch roommates
+        const roommatesResponse = await axiosInstance.get("roommates");
+        setRoommates(roommatesResponse.data);
       } catch (error) {
         console.error("Failed to add roommate:", error);
+        // toast.error("Failed to add roommate.");
       }
     }
   };
